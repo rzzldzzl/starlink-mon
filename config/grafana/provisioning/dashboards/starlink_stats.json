@@ -132,7 +132,7 @@
             },
             "renameByName": {
               "alerts": "Alerts",
-              "state": "Stage",
+              "state": "State",
               "uptime": "Uptime"
             }
           }
