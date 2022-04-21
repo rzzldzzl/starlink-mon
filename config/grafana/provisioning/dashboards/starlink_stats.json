@@ -1,0 +1,882 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": "-- Grafana --",
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 9,
+  "iteration": 1650561282986,
+  "links": [],
+  "liveNow": false,
+  "panels": [
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          }
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "Uptime"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "s"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 12,
+        "x": 0,
+        "y": 0
+      },
+      "id": 6,
+      "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "/.*/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 13,
+          "refId": "A"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "alert_mast_not_near_vertical": true,
+              "alert_motors_stuck": true,
+              "alert_roaming": true,
+              "alert_slow_ethernet_speeds": true,
+              "alert_thermal_shutdown": true,
+              "alert_thermal_throttle": true,
+              "alert_unexpected_location": true,
+              "currently_obstructed": true,
+              "direction_azimuth": true,
+              "direction_elevation": true,
+              "downlink_throughput_bps": true,
+              "fraction_obstructed": true,
+              "hardware_version": true,
+              "pop_ping_drop_rate": true,
+              "pop_ping_latency_ms": true,
+              "seconds_to_first_nonempty_slot": true,
+              "software_version": true,
+              "uplink_throughput_bps": true
+            },
+            "indexByName": {
+              "alert_mast_not_near_vertical": 0,
+              "alert_motors_stuck": 1,
+              "alert_roaming": 2,
+              "alert_slow_ethernet_speeds": 3,
+              "alert_thermal_shutdown": 4,
+              "alert_thermal_throttle": 5,
+              "alert_unexpected_location": 6,
+              "alerts": 9,
+              "state": 7,
+              "uptime": 8
+            },
+            "renameByName": {
+              "alerts": "Alerts",
+              "state": "Stage",
+              "uptime": "Uptime"
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P5697886F9CA74929"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "orange",
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "align": "center",
+            "displayMode": "auto"
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 3,
+        "w": 12,
+        "x": 12,
+        "y": 0
+      },
+      "id": 13,
+      "options": {
+        "footer": {
+          "fields": "",
+          "reducer": [
+            "sum"
+          ],
+          "show": false
+        },
+        "showHeader": true
+      },
+      "pluginVersion": "8.4.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P5697886F9CA74929"
+          },
+          "query": "from(bucket: \"${DS_INFLUXDB}\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"spacex.starlink.user_terminal.status\")\n  |> filter(fn: (r) => r[\"id\"] == \"${DISH_ID}\")\n  |> last()\n  |> pivot(rowKey: [\"_time\"], columnKey: [\"_field\"], valueColumn: \"_value\")\n  |> drop(columns: [\"_start\", \"_stop\", \"_time\", \"_measurement\", \"id\"])",
+          "refId": "A"
+        }
+      ],
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "alert_mast_not_near_vertical": true,
+              "alert_motors_stuck": true,
+              "alert_roaming": true,
+              "alert_slow_ethernet_speeds": true,
+              "alert_thermal_shutdown": true,
+              "alert_thermal_throttle": true,
+              "alert_unexpected_location": true,
+              "alerts": true,
+              "currently_obstructed": true,
+              "direction_azimuth": true,
+              "direction_elevation": true,
+              "downlink_throughput_bps": true,
+              "fraction_obstructed": true,
+              "hardware_version": false,
+              "pop_ping_drop_rate": true,
+              "pop_ping_latency_ms": true,
+              "seconds_to_first_nonempty_slot": true,
+              "state": true,
+              "uplink_throughput_bps": true,
+              "uptime": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "alert_mast_not_near_vertical": "",
+              "alert_motors_stuck": "",
+              "alert_roaming": "",
+              "alert_slow_ethernet_speeds": "",
+              "alert_thermal_shutdown": "",
+              "alert_thermal_throttle": "",
+              "alert_unexpected_location": "",
+              "alerts": "",
+              "currently_obstructed": "",
+              "direction_azimuth": "",
+              "hardware_version": "Hardware Version",
+              "software_version": "Software Version",
+              "state": "",
+              "uplink_throughput_bps": "",
+              "uptime": ""
+            }
+          }
+        }
+      ],
+      "type": "table"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P5697886F9CA74929"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "dark-blue",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "binbps"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "downlink_throughput_bps"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Down"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "uplink_throughput_bps"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Up"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "yellow",
+                  "mode": "fixed"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 3
+      },
+      "id": 11,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P5697886F9CA74929"
+          },
+          "query": "from(bucket: \"${DS_INFLUXDB}\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"spacex.starlink.user_terminal.history\")\n  |> filter(fn: (r) => r[\"_field\"] == \"downlink_throughput_bps\" or r[\"_field\"] == \"uplink_throughput_bps\")\n  |> filter(fn: (r) => r[\"id\"] == \"${DISH_ID}\")\n  |> aggregateWindow(every: ${SPAN}, fn: ${STATS_FUNCTION}, createEmpty: false)",
+          "refId": "A"
+        }
+      ],
+      "title": "Throughput",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "P5697886F9CA74929"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "fixedColor": "yellow",
+            "mode": "fixed"
+          },
+          "custom": {
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "ms"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "pop_ping_drop_rate"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Drop Rate"
+              },
+              {
+                "id": "custom.axisPlacement",
+                "value": "right"
+              },
+              {
+                "id": "max",
+                "value": 1
+              },
+              {
+                "id": "custom.drawStyle",
+                "value": "bars"
+              },
+              {
+                "id": "color",
+                "value": {
+                  "fixedColor": "dark-red",
+                  "mode": "fixed"
+                }
+              },
+              {
+                "id": "unit",
+                "value": "percentunit"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "pop_ping_latency_ms"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Latency"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 12,
+        "w": 14,
+        "x": 0,
+        "y": 12
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [
+            "last",
+            "max"
+          ],
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "8.2.5",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "P5697886F9CA74929"
+          },
+          "query": "from(bucket: \"${DS_INFLUXDB}\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"spacex.starlink.user_terminal.history\")\n  |> filter(fn: (r) => r[\"_field\"] == \"pop_ping_latency_ms\" or r[\"_field\"] == \"pop_ping_drop_rate\")\n  |> filter(fn: (r) => r[\"id\"] == \"${DISH_ID}\")\n  |> aggregateWindow(every: ${SPAN}, fn: ${STATS_FUNCTION}, createEmpty: false)",
+          "refId": "A"
+        }
+      ],
+      "title": "Ping Latency & Drop Percertage",
+      "transformations": [],
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "false": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "False"
+                },
+                "true": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "True"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 10,
+        "x": 14,
+        "y": 12
+      },
+      "id": 7,
+      "links": [],
+      "options": {
+        "colorMode": "value",
+        "graphMode": "area",
+        "justifyMode": "center",
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "/.*/",
+          "values": false
+        },
+        "textMode": "auto"
+      },
+      "pluginVersion": "8.4.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 13,
+          "refId": "A"
+        }
+      ],
+      "title": "Alerts",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "alerts": true,
+              "currently_obstructed": true,
+              "direction_azimuth": true,
+              "direction_elevation": true,
+              "downlink_throughput_bps": true,
+              "fraction_obstructed": true,
+              "hardware_version": true,
+              "pop_ping_drop_rate": true,
+              "pop_ping_latency_ms": true,
+              "seconds_to_first_nonempty_slot": true,
+              "software_version": true,
+              "state": true,
+              "uplink_throughput_bps": true,
+              "uptime": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "alert_mast_not_near_vertical": "Not Vertical",
+              "alert_motors_stuck": "Motors Stuck",
+              "alert_roaming": "Roaming",
+              "alert_slow_ethernet_speeds": "Slow Ethernet",
+              "alert_thermal_shutdown": "Thermal Shutdown",
+              "alert_thermal_throttle": "Thermal Throttle",
+              "alert_unexpected_location": "Unexpected Location",
+              "alerts": ""
+            }
+          }
+        }
+      ],
+      "type": "stat"
+    },
+    {
+      "datasource": {
+        "type": "datasource",
+        "uid": "-- Dashboard --"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "thresholds"
+          },
+          "mappings": [
+            {
+              "options": {
+                "false": {
+                  "color": "green",
+                  "index": 0,
+                  "text": "False"
+                },
+                "true": {
+                  "color": "red",
+                  "index": 1,
+                  "text": "True"
+                }
+              },
+              "type": "value"
+            }
+          ],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 50
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 6,
+        "w": 10,
+        "x": 14,
+        "y": 18
+      },
+      "id": 15,
+      "options": {
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [],
+          "fields": "/.*/",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true
+      },
+      "pluginVersion": "8.4.6",
+      "targets": [
+        {
+          "datasource": {
+            "type": "datasource",
+            "uid": "-- Dashboard --"
+          },
+          "panelId": 13,
+          "refId": "A"
+        }
+      ],
+      "title": "Obstruction",
+      "transformations": [
+        {
+          "id": "organize",
+          "options": {
+            "excludeByName": {
+              "alert_mast_not_near_vertical": true,
+              "alert_motors_stuck": true,
+              "alert_roaming": true,
+              "alert_slow_ethernet_speeds": true,
+              "alert_thermal_shutdown": true,
+              "alert_thermal_throttle": true,
+              "alert_unexpected_location": true,
+              "alerts": true,
+              "currently_obstructed": false,
+              "direction_azimuth": true,
+              "direction_elevation": true,
+              "downlink_throughput_bps": true,
+              "fraction_obstructed": false,
+              "hardware_version": true,
+              "pop_ping_drop_rate": true,
+              "pop_ping_latency_ms": true,
+              "seconds_to_first_nonempty_slot": true,
+              "software_version": true,
+              "state": true,
+              "uplink_throughput_bps": true,
+              "uptime": true
+            },
+            "indexByName": {},
+            "renameByName": {
+              "alerts": "",
+              "currently_obstructed": "Obstructed",
+              "fraction_obstructed": "Obstructed %"
+            }
+          }
+        }
+      ],
+      "type": "gauge"
+    }
+  ],
+  "refresh": "",
+  "schemaVersion": 35,
+  "style": "dark",
+  "tags": [],
+  "templating": {
+    "list": [
+      {
+        "hide": 2,
+        "label": "InfluxDB DataSource",
+        "name": "DS_INFLUXDB",
+        "query": "starlinkstats",
+        "skipUrlSync": false,
+        "type": "constant"
+      },
+      {
+        "current": {
+          "selected": false,
+          "text": "ut01000000-00000000-001aff6b",
+          "value": "ut01000000-00000000-001aff6b"
+        },
+        "datasource": {
+          "type": "influxdb",
+          "uid": "P5697886F9CA74929"
+        },
+        "definition": "from(bucket: \"${DS_INFLUXDB}\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"spacex.starlink.user_terminal.status\")\n  |> filter(fn: (r) => r[\"_field\"] == \"state\")\n  |> distinct(column: \"id\")",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Dish ID:",
+        "multi": false,
+        "name": "DISH_ID",
+        "options": [],
+        "query": "from(bucket: \"${DS_INFLUXDB}\")\n  |> range(start: v.timeRangeStart, stop: v.timeRangeStop)\n  |> filter(fn: (r) => r[\"_measurement\"] == \"spacex.starlink.user_terminal.status\")\n  |> filter(fn: (r) => r[\"_field\"] == \"state\")\n  |> distinct(column: \"id\")",
+        "refresh": 1,
+        "regex": "",
+        "skipUrlSync": false,
+        "sort": 0,
+        "type": "query"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "mean",
+          "value": "mean"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Stats Function",
+        "multi": false,
+        "name": "STATS_FUNCTION",
+        "options": [
+          {
+            "selected": true,
+            "text": "mean",
+            "value": "mean"
+          },
+          {
+            "selected": false,
+            "text": "max",
+            "value": "max"
+          },
+          {
+            "selected": false,
+            "text": "p95",
+            "value": "(tables=<-, column) => tables |> quantile(q: 0.95, method: \"exact_selector\")"
+          }
+        ],
+        "query": "mean,max, p95 : (tables=<-\\, column) => tables |> quantile(q: 0.95\\, method: \"exact_selector\")",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      },
+      {
+        "current": {
+          "selected": true,
+          "text": "auto",
+          "value": "v.windowPeriod"
+        },
+        "hide": 0,
+        "includeAll": false,
+        "label": "Span",
+        "multi": false,
+        "name": "SPAN",
+        "options": [
+          {
+            "selected": true,
+            "text": "auto",
+            "value": "v.windowPeriod"
+          },
+          {
+            "selected": false,
+            "text": "1s",
+            "value": "1s"
+          },
+          {
+            "selected": false,
+            "text": "30s",
+            "value": "30s"
+          },
+          {
+            "selected": false,
+            "text": "1m",
+            "value": "1m"
+          },
+          {
+            "selected": false,
+            "text": "5m",
+            "value": "5m"
+          }
+        ],
+        "query": "auto : v.windowPeriod, 1s, 30s, 1m, 5m",
+        "queryValue": "",
+        "skipUrlSync": false,
+        "type": "custom"
+      }
+    ]
+  },
+  "time": {
+    "from": "now-3h",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "5s",
+      "10s",
+      "30s",
+      "1m",
+      "5m",
+      "15m",
+      "30m",
+      "1h",
+      "2h",
+      "1d"
+    ]
+  },
+  "timezone": "",
+  "title": "Starlink Stats",
+  "uid": "mwneEVwnz",
+  "version": 22,
+  "weekStart": ""
+}

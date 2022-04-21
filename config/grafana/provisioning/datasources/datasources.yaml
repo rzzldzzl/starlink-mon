@@ -1,0 +1,18 @@
+apiVersion: 1
+
+deleteDatasources:
+- name: InfluxDB_v2_Flux
+  orgId: 1
+
+datasources:
+- name: InfluxDB_v2_Flux
+  type: influxdb
+  access: proxy
+  url: http://influxdb:8086
+  secureJsonData:
+    token: myToken
+  jsonData:
+    version: Flux
+    organization: myOrg
+    defaultBucket: starlinkstats
+    tlsSkipVerify: true
