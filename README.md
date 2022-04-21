@@ -5,7 +5,7 @@ Docker Compose and Grafana configs to stand up:
 * Grafana
   * Starlink Dashboard
 
-## Running Images
+## Running Containers
 Clone Repo  
 ```git clone https://github.com/rzzldzzl/starlink-mon.git```  
 
