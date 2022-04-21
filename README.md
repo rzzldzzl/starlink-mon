@@ -6,7 +6,12 @@ Docker Compose and Grafana configs to stand up:
   * Starlink Dashboard
 
 ## Running Images
-`docker-compose up -d`
+Clone Repo  
+```git clone https://github.com/rzzldzzl/starlink-mon.git```  
+
+Execute docker-compose  
+```cd startlink-mon```  
+```docker-compose up -d```
 
 ## Grafana Url
 http://localhost:3000
