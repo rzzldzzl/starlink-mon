@@ -22,7 +22,7 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
   "id": 9,
-  "iteration": 1650561282986,
+  "iteration": 1650584109890,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -112,6 +112,8 @@
               "downlink_throughput_bps": true,
               "fraction_obstructed": true,
               "hardware_version": true,
+              "obstruction_duration": true,
+              "obstruction_interval": true,
               "pop_ping_drop_rate": true,
               "pop_ping_latency_ms": true,
               "seconds_to_first_nonempty_slot": true,
@@ -605,6 +607,8 @@
               "downlink_throughput_bps": true,
               "fraction_obstructed": true,
               "hardware_version": true,
+              "obstruction_duration": true,
+              "obstruction_interval": true,
               "pop_ping_drop_rate": true,
               "pop_ping_latency_ms": true,
               "seconds_to_first_nonempty_slot": true,
@@ -877,6 +881,6 @@
   "timezone": "",
   "title": "Starlink Stats",
   "uid": "mwneEVwnz",
-  "version": 22,
+  "version": 24,
   "weekStart": ""
 }
