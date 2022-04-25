@@ -17,4 +17,4 @@ Execute docker-compose
 http://localhost:3000
 
 ## Grafana Starlink Dashboard Screenshot
-![](images/Screen%20Shot%202022-04-21%20at%203.34.12%20PM.png)
+![](images/ScreenShot_1.png)
