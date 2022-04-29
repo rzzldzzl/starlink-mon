@@ -22,7 +22,7 @@
   "fiscalYearStartMonth": 0,
   "graphTooltip": 2,
   "id": 9,
-  "iteration": 1650911243738,
+  "iteration": 1651238402555,
   "links": [],
   "liveNow": false,
   "panels": [
@@ -1153,7 +1153,7 @@
       },
       {
         "current": {
-          "selected": true,
+          "selected": false,
           "text": "mean",
           "value": "mean"
         },
@@ -1186,9 +1186,9 @@
       },
       {
         "current": {
-          "selected": true,
-          "text": "10s",
-          "value": "10s"
+          "selected": false,
+          "text": "auto",
+          "value": "v.windowPeriod"
         },
         "hide": 0,
         "includeAll": false,
@@ -1197,7 +1197,7 @@
         "name": "SPAN",
         "options": [
           {
-            "selected": false,
+            "selected": true,
             "text": "auto",
             "value": "v.windowPeriod"
           },
@@ -1207,7 +1207,7 @@
             "value": "1s"
           },
           {
-            "selected": true,
+            "selected": false,
             "text": "10s",
             "value": "10s"
           },
@@ -1230,8 +1230,8 @@
     ]
   },
   "time": {
-    "from": "2022-04-24T09:13:49.392Z",
-    "to": "2022-04-24T09:16:27.417Z"
+    "from": "now-3h",
+    "to": "now"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -1250,6 +1250,6 @@
   "timezone": "",
   "title": "Starlink Stats",
   "uid": "mwneEVwnz",
-  "version": 87,
+  "version": 90,
   "weekStart": ""
 }
