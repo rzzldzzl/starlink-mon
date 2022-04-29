@@ -6,12 +6,14 @@ Docker Compose and Grafana configs to stand up:
   * Starlink Dashboard
 
 ## Running Containers
-Clone Repo  
-```git clone https://github.com/rzzldzzl/starlink-mon.git```  
-
-Execute docker-compose  
-```cd startlink-mon```  
-```docker-compose up -d```
+* [Install Docker Desktop on Mac](https://docs.docker.com/desktop/mac/install/)  
+* Install **docker-compose**  
+  * ```sudo curl -L "https://github.com/docker/compose/releases/download/v2.5.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose```
+  * ```sudo chmod +x /usr/local/bin/docker-compose```
+* Clone Repo  
+  * ```git clone https://github.com/rzzldzzl/starlink-mon.git```  
+* Execute **docker-compose**  
+  * ```docker-compose -f starlink-mon/docker-compose.yaml up -d```
 
 ## Grafana Url
 http://localhost:3000
