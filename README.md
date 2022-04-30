@@ -3,7 +3,7 @@ Docker Compose and Grafana configs to stand up:
 * [starlink-grpc-tools](https://github.com/sparky8512/starlink-grpc-tools)
 * InfluxDB
 * Grafana
-  * Starlink Dashboard
+  * [Starlink Dashboard](#grafana-starlink-dashboard-screenshot)
 
 ## Running Containers
 * [Install Docker Desktop on Mac](https://docs.docker.com/desktop/mac/install/)  
