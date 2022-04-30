@@ -11,7 +11,7 @@ services:
     ports:
       - '8086:8086'
     volumes:
-      - ./config/influxdb:/etc/influxdb2
+      #- ./config/influxdb:/etc/influxdb2
       - influxdb_data:/var/lib/influxdb2
     environment:
       - INFLUXDB_REPORTING_DISABLED=true
