@@ -16,7 +16,7 @@ Docker Compose and Grafana configs to stand up:
   * ```docker-compose -f starlink-mon/docker-compose.yaml up -d```
 
 ## Grafana Url
-http://localhost:3000
+http://localhost:3000/d/mwneEVwnz/starlink-stats
 
 ## Grafana Starlink Dashboard Screenshot
 ![](images/ScreenShot_1.png)

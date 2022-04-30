@@ -5,8 +5,8 @@ providers:
     orgId: 1
     type: file
     folder: ''
-    disableDeletion: true
-    editable: false
-    allowUiUpdates: false
+    disableDeletion: false
+    editable: true
+    allowUiUpdates: true
     options:
       path: /etc/grafana/provisioning/dashboards/
